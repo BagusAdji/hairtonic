@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hansome Hair Tonic — Hair Tonic Papermint &amp; Gingseng (Shopee Official Store)</title>
+    <meta
+      name="description"
+      content="Website resmi Hansome Hair Tonic. Tersedia dua varian perawatan rambut: Hair Tonic Papermint dan Hair Tonic Gingseng dengan pilihan ukuran 60 ml (Rp15.000) dan 100 ml (Rp25.000). Pesan langsung di Shopee!"
+    />
+    <meta name="theme-color" content="#0d2117" />
+    <link rel="icon" type="image/svg+xml" href="/assets/logo/brand-logo.svg" />
+
+    <!-- Preload Model 3D Utama agar Hero tampil cepat -->
+    <link
+      rel="preload"
+      href="/assets/models/hair-tonic-fresh.glb"
+      as="fetch"
+      type="model/gltf-binary"
+      crossorigin="anonymous"
+    />
+
+    <!-- Typography: Plus Jakarta Sans & Outfit (Maksimal 2 Font Family sesuai PRD) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheets Modular -->
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <link rel="stylesheet" href="/css/hero.css" />
+    <link rel="stylesheet" href="/css/sections.css" />
+    <link rel="stylesheet" href="/css/responsive.css" />
+
+    <!-- Import Map untuk kompatibilitas langsung di Static Server maupun Vite -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "./node_modules/three/build/three.module.js",
+          "three/addons/": "./node_modules/three/examples/jsm/",
+          "gsap": "./node_modules/gsap/index.js",
+          "gsap/ScrollTrigger": "./node_modules/gsap/ScrollTrigger.js",
+          "lenis": "./node_modules/lenis/dist/lenis.mjs"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Lewati ke konten utama</a>
+
+    <!-- =====================================================================
+         1. NAVBAR
+         ===================================================================== -->
+    <header id="site-header" class="site-header">
+      <div class="container navbar-inner">
+        <a href="#hero" class="brand-link" aria-label="Hansome Hair Tonic - Kembali ke atas">
+          <img
+            src="/assets/logo/brand-logo.svg"
+            alt="Hansome Hair Tonic Logo"
+            class="brand-logo-img"
+            width="150"
+            height="42"
+          />
+        </a>
+
+        <nav class="nav-links" aria-label="Navigasi Utama">
+          <a href="#hero" class="nav-link">Showcase 3D</a>
+          <a href="#produk" class="nav-link">Varian Produk</a>
+          <a href="#manfaat" class="nav-link">Manfaat</a>
+          <a href="#cara-penggunaan" class="nav-link">Cara Pakai</a>
+          <a href="#paket-harga" class="nav-link">Paket Harga</a>
+          <a href="#testimoni" class="nav-link">Testimoni</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a
+            href="https://id.shp.ee/e5fEvsRw"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary btn-sm nav-cta-desktop btn-shopee"
+            data-buy-shopee
+          >
+            <svg class="shopee-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M19.78 7.37c-.12-.4-.48-.68-.9-.72l-3.32-.29c-.06-.82-.36-2.48-1.55-3.66C12.87 1.55 11.45 1 9.98 1c-1.47 0-2.89.55-4.03 1.7-1.19 1.18-1.49 2.84-1.55 3.66L1.08 6.65c-.42.04-.78.32-.9.72-.12.4.02.84.34 1.11l2.45 2.05-.72 8.42c-.04.47.16.92.53 1.21.37.29.87.37 1.31.21l5.91-2.12 5.91 2.12c.18.06.37.1.56.1.28 0 .56-.08.8-.24.37-.29.57-.74.53-1.21l-.72-8.42 2.45-2.05c.32-.27.46-.71.34-1.11zM9.98 3.25c.87 0 1.69.32 2.37.99.73.73.96 1.77 1.02 2.41H6.6c.06-.64.29-1.68 1.02-2.41.67-.67 1.5-.99 2.36-.99z"/>
+            </svg>
+            <span>Beli di Shopee</span>
+          </a>
+
+          <button
+            type="button"
+            id="mobile-menu-toggle"
+            class="mobile-menu-btn"
+            aria-label="Buka menu navigasi"
+            aria-expanded="false"
+            aria-controls="mobile-nav-drawer"
+          >
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <nav
+      id="mobile-nav-drawer"
+      class="mobile-nav-drawer"
+      aria-label="Navigasi Mobile"
+      aria-hidden="true"
+    >
+      <ul class="mobile-nav-list">
+        <li><a href="#hero" class="mobile-nav-link">Showcase 3D</a></li>
+        <li><a href="#produk" class="mobile-nav-link">Varian Produk</a></li>
+        <li><a href="#manfaat" class="mobile-nav-link">Manfaat Utama</a></li>
+        <li><a href="#cara-penggunaan" class="mobile-nav-link">Cara Penggunaan</a></li>
+        <li><a href="#paket-harga" class="mobile-nav-link">Paket &amp; Harga</a></li>
+        <li><a href="#testimoni" class="mobile-nav-link">Testimoni</a></li>
+        <li><a href="#faq" class="mobile-nav-link">Tanya Jawab (FAQ)</a></li>
+      </ul>
+      <a
+        href="https://id.shp.ee/e5fEvsRw"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-primary btn-shopee"
+        style="width: 100%"
+        data-buy-shopee
+      >
+        <svg class="shopee-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M19.78 7.37c-.12-.4-.48-.68-.9-.72l-3.32-.29c-.06-.82-.36-2.48-1.55-3.66C12.87 1.55 11.45 1 9.98 1c-1.47 0-2.89.55-4.03 1.7-1.19 1.18-1.49 2.84-1.55 3.66L1.08 6.65c-.42.04-.78.32-.9.72-.12.4.02.84.34 1.11l2.45 2.05-.72 8.42c-.04.47.16.92.53 1.21.37.29.87.37 1.31.21l5.91-2.12 5.91 2.12c.18.06.37.1.56.1.28 0 .56-.08.8-.24.37-.29.57-.74.53-1.21l-.72-8.42 2.45-2.05c.32-.27.46-.71.34-1.11zM9.98 3.25c.87 0 1.69.32 2.37.99.73.73.96 1.77 1.02 2.41H6.6c.06-.64.29-1.68 1.02-2.41.67-.67 1.5-.99 2.36-.99z"/>
+        </svg>
+        <span>Beli Sekarang di Shopee</span>
+      </a>
+    </nav>
+
+    <main id="main-content">
+      <!-- ===================================================================
+           2. HERO / 3D PRODUCT SHOWCASE
+           =================================================================== -->
+      <section
+        id="hero"
+        class="hero-section"
+        aria-label="3D Product Showcase"
+        data-active-product="fresh"
+      >
+        <div class="hero-backdrop-rings" aria-hidden="true"></div>
+
+        <!-- Screen-reader live region untuk mengumumkan pergantian produk -->
+        <div id="hero-live-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+        <div class="container hero-container" id="hero-showcase-interactive">
+          <!-- Top Bar: NOW SHOWING -->
+          <div class="hero-status-bar" data-entrance="info">
+            <span class="now-showing-pill">
+              <span class="pulse-dot" aria-hidden="true"></span>
+              <span>NOW SHOWING</span>
+            </span>
+            <span class="hero-meta-divider" aria-hidden="true">•</span>
+            <span id="hero-product-code" class="hero-product-code" data-hero-sync>
+              PRODUCT 01
+            </span>
+            <span id="hero-product-positioning" class="hero-positioning-label" data-hero-sync>
+              Daily / Fresh Hair Care
+            </span>
+          </div>
+
+          <!-- Showcase 3-Column Grid -->
+          <div class="hero-showcase-grid">
+            <!-- Left Column: Product Name & Description -->
+            <div class="hero-info-panel" data-entrance="info">
+              <h1 id="hero-product-name" class="hero-product-title" data-hero-sync>
+                Hair Tonic Papermint
+              </h1>
+              <p id="hero-product-subtitle" class="hero-product-subtitle" data-hero-sync>
+                Peppermint Daily Refresh
+              </p>
+              <p id="hero-product-description" class="hero-product-description" data-hero-sync>
+                Perawatan rambut untuk penggunaan sehari-hari dengan ekstrak Peppermint dan
+                Menthol yang memberi sensasi sejuk menyegarkan serta menjaga kenyamanan kulit
+                kepala.
+              </p>
+            </div>
+
+            <!-- Center Stage: 3D Bottle Canvas + Floating Badges -->
+            <div class="hero-center-showcase">
+              <div id="hero-stage" class="hero-stage">
+                <!-- Satu-satunya Canvas Three.js di Hero -->
+                <canvas
+                  id="hero-canvas"
+                  class="hero-canvas"
+                  aria-label="Model 3D interaktif botol Hansome Hair Tonic"
+                ></canvas>
+
+                <!-- Clean Loading Overlay -->
+                <div id="hero-loading" class="hero-loading" role="status" aria-live="polite">
+                  <div class="loading-spinner" aria-hidden="true"></div>
+                  <span class="loading-text">Memuat Model 3D...</span>
+                </div>
+
+                <!-- Poster Fallback jika WebGL tidak tersedia atau GLB gagal dimuat -->
+                <div id="hero-fallback" class="hero-fallback" hidden>
+                  <img
+                    id="hero-fallback-img"
+                    src="/assets/logo/logo.png"
+                    alt="Hair Tonic Papermint - Peppermint Daily Refresh"
+                    class="hero-fallback-img"
+                    width="280"
+                    height="360"
+                  />
+                  <span class="hero-fallback-caption">Pratinjau Produk (Mode 2D Fallback)</span>
+                </div>
+              </div>
+
+              <!-- Floating Information Capsules (Kiri & Kanan pada Desktop, Rapi di Bawah pada Mobile) -->
+              <div class="hero-floating-badges-wrap">
+                <div
+                  id="hero-badge-left"
+                  class="hero-floating-badge hero-floating-badge--left"
+                >
+                  <div class="badge-icon-box" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M12 3C7.5 3 4 6.5 4 11C4 16.25 12 21 12 21C12 21 20 16.25 20 11C20 6.5 16.5 3 12 3Z"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <div class="badge-text-group">
+                    <span id="hero-badge-left-title" class="badge-title">Natural Care</span>
+                    <span id="hero-badge-left-detail" class="badge-detail">
+                      Peppermint &amp; Vitamin E
+                    </span>
+                  </div>
+                </div>
+
+                <div
+                  id="hero-badge-right"
+                  class="hero-floating-badge hero-floating-badge--right"
+                >
+                  <div class="badge-icon-box" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M12 2L14.8 8.5L22 9.3L16.5 14L18.2 21L12 17.3L5.8 21L7.5 14L2 9.3L9.2 8.5L12 2Z"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <div class="badge-text-group">
+                    <span id="hero-badge-right-title" class="badge-title">Fresh &amp; Light</span>
+                    <span id="hero-badge-right-detail" class="badge-detail">
+                      Sejuk &amp; Cepat Meresap
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Price & Primary CTA -->
+            <div class="hero-purchase-panel">
+              <div class="hero-price-card" data-entrance="info">
+                <div class="hero-price-top-row">
+                  <span class="hero-price-eyebrow">Harga Resmi</span>
+                  <div class="hero-price-row">
+                    <strong id="hero-product-price" class="hero-price-value" data-hero-sync>
+                      Rp15.000
+                    </strong>
+                    <span id="hero-product-volume" class="hero-volume-pill" data-hero-sync>
+                      60 ml
+                    </span>
+                  </div>
+                </div>
+                <div class="hero-size-selector" id="hero-size-selector" aria-label="Pilih Ukuran Botol">
+                  <button type="button" class="hero-size-pill is-active" data-size="60ml" aria-pressed="true">
+                    <span class="size-vol">60 ml</span>
+                    <span class="size-pr">Rp15.000</span>
+                  </button>
+                  <button type="button" class="hero-size-pill" data-size="100ml" aria-pressed="false">
+                    <span class="size-vol">100 ml</span>
+                    <span class="size-pr">Rp25.000</span>
+                  </button>
+                </div>
+              </div>
+
+              <div id="hero-cta-group" class="hero-cta-group">
+                <a
+                  id="hero-cta-btn"
+                  href="https://id.shp.ee/e5fEvsRw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-accent btn-lg btn-shopee"
+                  data-buy-shopee
+                >
+                  <svg class="shopee-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M19.78 7.37c-.12-.4-.48-.68-.9-.72l-3.32-.29c-.06-.82-.36-2.48-1.55-3.66C12.87 1.55 11.45 1 9.98 1c-1.47 0-2.89.55-4.03 1.7-1.19 1.18-1.49 2.84-1.55 3.66L1.08 6.65c-.42.04-.78.32-.9.72-.12.4.02.84.34 1.11l2.45 2.05-.72 8.42c-.04.47.16.92.53 1.21.37.29.87.37 1.31.21l5.91-2.12 5.91 2.12c.18.06.37.1.56.1.28 0 .56-.08.8-.24.37-.29.57-.74.53-1.21l-.72-8.42 2.45-2.05c.32-.27.46-.71.34-1.11zM9.98 3.25c.87 0 1.69.32 2.37.99.73.73.96 1.77 1.02 2.41H6.6c.06-.64.29-1.68 1.02-2.41.67-.67 1.5-.99 2.36-.99z"/>
+                  </svg>
+                  <span id="hero-cta-label">BELI DI SHOPEE — Rp15.000</span>
+                </a>
+                <span class="hero-cta-note">
+                  <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path
+                      d="M16.667 5L7.5 14.167 3.333 10"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  Shopee Official Store • Jaminan Produk Asli
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Controls: Two Product Indicators -->
+          <div class="hero-bottom-controls">
+            <div
+              id="hero-indicators"
+              class="hero-indicators"
+              role="tablist"
+              aria-label="Pilih Varian Produk Hair Tonic"
+            >
+              <button
+                type="button"
+                id="indicator-fresh"
+                class="indicator-btn is-active"
+                role="tab"
+                aria-selected="true"
+                aria-controls="hero"
+                data-product-indicator="0"
+                data-product-id="fresh"
+              >
+                <div class="indicator-top-row">
+                  <span class="indicator-code">01</span>
+                  <span class="indicator-price">Mulai Rp15.000</span>
+                </div>
+                <span class="indicator-name">Hair Tonic Papermint</span>
+                <span class="indicator-progress-track" aria-hidden="true">
+                  <span class="indicator-progress-fill"></span>
+                </span>
+              </button>
+
+              <button
+                type="button"
+                id="indicator-grow"
+                class="indicator-btn"
+                role="tab"
+                aria-selected="false"
+                aria-controls="hero"
+                tabindex="-1"
+                data-product-indicator="1"
+                data-product-id="grow"
+              >
+                <div class="indicator-top-row">
+                  <span class="indicator-code">02</span>
+                  <span class="indicator-price">Mulai Rp15.000</span>
+                </div>
+                <span class="indicator-name">Hair Tonic Gingseng</span>
+                <span class="indicator-progress-track" aria-hidden="true">
+                  <span class="indicator-progress-fill"></span>
+                </span>
+              </button>
+            </div>
+            <!-- <p class="hero-switch-hint">
+              Berganti otomatis setiap 5 detik • Klik indikator untuk memilih varian
+            </p> -->
+          </div>
+        </div>
+
+        <!-- Horizontal Marquee di Bawah Hero -->
+        <div class="hero-marquee" aria-label="Keunggulan Singkat Produk">
+          <div class="marquee-viewport">
+            <div id="hero-marquee-track" class="marquee-track">
+              <span class="marquee-item">
+                <span class="marquee-dot" aria-hidden="true"></span>
+                <span>BOTANICAL SCALP FORMULA</span>
+              </span>
+              <span class="marquee-item">
+                <span class="marquee-dot" aria-hidden="true"></span>
+                <span>PEPPERMINT &amp; GINSENG EXTRACT</span>
+              </span>
+              <span class="marquee-item">
+                <span class="marquee-dot" aria-hidden="true"></span>
+                <span>RINGAN &amp; TIDAK LENGKET</span>
+              </span>
+              <span class="marquee-item">
+                <span class="marquee-dot" aria-hidden="true"></span>
+                <span>NYAMAN DIGUNAKAN SETIAP HARI</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           3. PRODUCT INFORMATION (TEPAT DUA PRODUK UTAMA)
+           =================================================================== -->
+      <section id="produk" class="section" aria-labelledby="produk-heading">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-eyebrow">Dua Varian Spesialis</span>
+            <h2 id="produk-heading" class="section-title">
+              Pilih Perawatan yang Sesuai Kebutuhan Rambutmu
+            </h2>
+            <p class="section-subtitle">
+              Setiap botol Hansome Hair Tonic hadir dalam pilihan ukuran 60 ml (Rp15.000) dan 100 ml (Rp25.000) dengan dua
+              pendekatan perawatan: Hair Tonic Papermint (sejuk menyegarkan) dan Hair Tonic Gingseng (nutrisi kulit kepala &amp; akar).
+            </p>
+          </div>
+
+          <div id="products-grid" class="products-grid">
+            <!-- Diisi & disinkronkan secara otomatis dari js/config.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           4. BENEFITS SECTION
+           =================================================================== -->
+      <section id="manfaat" class="section section-alt" aria-labelledby="manfaat-heading">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-eyebrow">Keunggulan Produk</span>
+            <h2 id="manfaat-heading" class="section-title">
+              Kenapa Memilih Hair Tonic Kami?
+            </h2>
+            <p class="section-subtitle">
+              Dirancang khusus agar mudah menyatu dengan rutinitas harian tanpa ribet dan
+              nyaman di kulit kepala.
+            </p>
+          </div>
+
+          <div id="benefits-grid" class="benefits-grid">
+            <!-- Diisi dari js/config.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           5. CARA PENGGUNAAN (3 LANGKAH PRAKTIS)
+           =================================================================== -->
+      <section
+        id="cara-penggunaan"
+        class="section section-dark"
+        aria-labelledby="cara-pakai-heading"
+      >
+        <div class="container">
+          <div class="section-header">
+            <span class="section-eyebrow">Rutinitas 3 Langkah</span>
+            <h2 id="cara-pakai-heading" class="section-title">
+              Cara Penggunaan yang Mudah &amp; Cepat
+            </h2>
+            <p class="section-subtitle">
+              Cukup luangkan waktu kurang dari dua menit setelah keramas untuk merawat
+              kesegaran kulit kepala dan rambutmu.
+            </p>
+          </div>
+
+          <div class="steps-wrapper">
+            <div class="steps-connector-track" aria-hidden="true">
+              <div class="steps-connector-fill"></div>
+            </div>
+            <div id="steps-grid" class="steps-grid">
+              <!-- Diisi dari js/config.js -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           6. PAKET / HARGA SECTION
+           =================================================================== -->
+      <section id="paket-harga" class="section" aria-labelledby="paket-heading">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-eyebrow">Pilihan Paket Hemat</span>
+            <h2 id="paket-heading" class="section-title">
+              Penawaran Paket &amp; Harga Terbaik
+            </h2>
+            <p class="section-subtitle">
+              Mulai dari satu botol untuk mencoba atau pilih paket bundling untuk perawatan
+              rutin yang lebih hemat.
+            </p>
+          </div>
+
+          <div id="pricing-grid" class="pricing-grid">
+            <!-- Diisi dari js/config.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           7. TESTIMONI SECTION
+           =================================================================== -->
+      <section id="testimoni" class="section section-alt" aria-labelledby="testimoni-heading">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-eyebrow">Kesan Pengguna</span>
+            <h2 id="testimoni-heading" class="section-title">
+              Apa Kata Mereka tentang Hansome Hair Tonic
+            </h2>
+            <p class="section-subtitle">
+              Ulasan dan pengalaman konsumen yang telah merasakan kesegaran dan manfaat perawatan rambut Hansome Hair Tonic.
+            </p>
+          </div>
+
+
+          <div id="testimonials-grid" class="testimonials-grid">
+            <!-- Diisi dari js/config.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           8. FAQ ACCORDION SECTION
+           =================================================================== -->
+      <section id="faq" class="section" aria-labelledby="faq-heading">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-eyebrow">Informasi &amp; Bantuan</span>
+            <h2 id="faq-heading" class="section-title">
+              Pertanyaan yang Sering Diajukan (FAQ)
+            </h2>
+            <p class="section-subtitle">
+              Temukan jawaban cepat seputar pemakaian harian, kecocokan produk, penyimpanan,
+              hingga cara pemesanan.
+            </p>
+          </div>
+
+          <div id="faq-list" class="faq-list">
+            <!-- Diisi dari js/config.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           9. CTA PEMBELIAN SECTION
+           =================================================================== -->
+      <section id="pesan" class="section section-alt" aria-labelledby="cta-final-heading">
+        <div class="container">
+          <div class="cta-banner-card">
+            <span class="section-eyebrow" style="background: rgba(255,255,255,0.12); color: #69f0ae">
+              Siap Dikirim Hari Ini
+            </span>
+            <h2 id="cta-final-heading" class="cta-banner-title">
+              Saatnya Mulai Merawat Rambutmu
+            </h2>
+            <p class="cta-banner-desc">
+              Pilih varian <strong>Hair Tonic Papermint</strong> untuk sensasi dingin segar atau
+              <strong>Hair Tonic Gingseng</strong> untuk perawatan intensif akar rambut. Tersedia
+              pilihan ukuran <strong>60 ml (Rp15.000)</strong> dan <strong>100 ml (Rp25.000)</strong>
+              langsung di official store Shopee kami dengan promo dan garansi produk asli.
+            </p>
+            <div class="cta-banner-actions">
+              <a
+                href="https://id.shp.ee/e5fEvsRw"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-cta-light btn-lg btn-shopee"
+                data-buy-shopee
+              >
+                <svg class="shopee-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M19.78 7.37c-.12-.4-.48-.68-.9-.72l-3.32-.29c-.06-.82-.36-2.48-1.55-3.66C12.87 1.55 11.45 1 9.98 1c-1.47 0-2.89.55-4.03 1.7-1.19 1.18-1.49 2.84-1.55 3.66L1.08 6.65c-.42.04-.78.32-.9.72-.12.4.02.84.34 1.11l2.45 2.05-.72 8.42c-.04.47.16.92.53 1.21.37.29.87.37 1.31.21l5.91-2.12 5.91 2.12c.18.06.37.1.56.1.28 0 .56-.08.8-.24.37-.29.57-.74.53-1.21l-.72-8.42 2.45-2.05c.32-.27.46-.71.34-1.11zM9.98 3.25c.87 0 1.69.32 2.37.99.73.73.96 1.77 1.02 2.41H6.6c.06-.64.29-1.68 1.02-2.41.67-.67 1.5-.99 2.36-.99z"/>
+                </svg>
+                <span>BELI SEKARANG DI SHOPEE</span>
+              </a>
+              <a href="#produk" class="btn btn-outline btn-lg" style="color:#fff; border-color:rgba(255,255,255,0.28)">
+                Lihat Semua Varian
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- =====================================================================
+         10. FOOTER
+         ===================================================================== -->
+    <footer id="footer" class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand-col">
+            <a href="#hero" class="footer-brand-link" aria-label="Hansome Hair Tonic">
+              <img
+                src="/assets/logo/brand-logo.svg"
+                alt="Hansome Hair Tonic Logo"
+                class="footer-logo-img"
+                width="145"
+                height="40"
+              />
+            </a>
+            <p class="footer-tagline">
+              Inovasi produk kewirausahaan perawatan rambut &amp; kulit kepala dalam kemasan
+              spray praktis 60 ml dan 100 ml.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="footer-heading">Navigasi</h3>
+            <ul class="footer-link-list">
+              <li><a href="#hero">3D Showcase</a></li>
+              <li><a href="#produk">Informasi Produk</a></li>
+              <li><a href="#manfaat">Manfaat</a></li>
+              <li><a href="#cara-penggunaan">Cara Penggunaan</a></li>
+              <li><a href="#paket-harga">Paket &amp; Harga</a></li>
+              <li><a href="#faq">FAQ</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="footer-heading">Varian &amp; Harga</h3>
+            <ul class="footer-link-list">
+              <li><a href="#produk">Hair Tonic Papermint 60 ml (Rp15.000)</a></li>
+              <li><a href="#produk">Hair Tonic Papermint 100 ml (Rp25.000)</a></li>
+              <li><a href="#produk">Hair Tonic Gingseng 60 ml (Rp15.000)</a></li>
+              <li><a href="#produk">Hair Tonic Gingseng 100 ml (Rp25.000)</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="footer-heading">Media Sosial</h3>
+            <ul
+              id="footer-socials-list"
+              class="footer-link-list"
+            >
+              <li>
+                <a href="https://www.instagram.com/hansome.hairtonic" target="_blank" rel="noopener noreferrer" class="footer-social-link">
+                  <span class="social-platform">Instagram:</span>
+                  <span class="social-handle">@hansome.hairtonic</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.tiktok.com/@hansome.hairtonic" target="_blank" rel="noopener noreferrer" class="footer-social-link">
+                  <span class="social-platform">TikTok:</span>
+                  <span class="social-handle">@hansome.hairtonic</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="footer-heading">Online Shop</h3>
+            <ul
+              id="footer-onlineshop-list"
+              class="footer-link-list"
+            >
+              <li>
+                <a href="https://id.shp.ee/e5fEvsRw" target="_blank" rel="noopener noreferrer" class="footer-shop-link">
+                  <span class="shop-badge">Shopee</span>
+                  <span class="shop-title">Official Store</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 Hansome Hair Tonic — Proyek Kewirausahaan. Hak cipta dilindungi.</p>
+          <p>Tersedia resmi di Shopee Official Store.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Entry Script ES Module -->
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,298 @@
+/* ==========================================================================
+   COMPONENTS.CSS — Navbar, Buttons, Badges, Section Headers, & Reusable UI
+   ========================================================================== */
+
+/* 1. Navbar */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    backdrop-filter 0.3s ease;
+}
+
+.site-header.is-scrolled {
+  background-color: rgba(246, 245, 239, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 var(--border-subtle), var(--shadow-sm);
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--bg-dark-forest);
+  font-weight: 800;
+}
+
+.brand-logo-img {
+  height: 40px;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.85rem;
+}
+
+.nav-link {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  position: relative;
+  padding-block: 0.25rem;
+  transition: color var(--transition-fast);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-green);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s var(--ease-out-expo);
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--text-primary);
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Mobile Menu Button & Drawer */
+.mobile-menu-btn {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hamburger-line {
+  width: 20px;
+  height: 2px;
+  background-color: var(--text-primary);
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.mobile-menu-btn.is-active .hamburger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.mobile-menu-btn.is-active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-btn.is-active .hamburger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.mobile-nav-drawer {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  background: rgba(246, 245, 239, 0.98);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border-strong);
+  padding: 1.5rem var(--container-pad) 2rem;
+  transform: translateY(-120%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.35s var(--ease-out-expo), opacity 0.25s ease;
+  z-index: 95;
+  box-shadow: var(--shadow-lg);
+}
+
+.mobile-nav-drawer.is-open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.mobile-nav-link {
+  display: block;
+  padding: 0.75rem 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* 2. Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.94rem;
+  letter-spacing: 0.01em;
+  padding: 0.85rem 1.55rem;
+  border-radius: var(--radius-pill);
+  transition:
+    transform 0.25s var(--ease-out-expo),
+    background-color 0.25s ease,
+    box-shadow 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-sm {
+  padding: 0.62rem 1.2rem;
+  font-size: 0.86rem;
+}
+
+.btn-lg {
+  padding: 1rem 1.9rem;
+  font-size: 0.98rem;
+}
+
+.btn-primary {
+  background-color: var(--bg-dark-forest);
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(13, 33, 23, 0.2);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-green);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(46, 125, 50, 0.28);
+}
+
+.btn-accent {
+  background-color: var(--active-accent, var(--accent-green));
+  color: #ffffff;
+  box-shadow: 0 12px 28px var(--active-glow, rgba(46, 125, 50, 0.28));
+}
+
+.btn-accent:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  border: 1.5px solid var(--border-strong);
+  background-color: transparent;
+  color: var(--text-primary);
+}
+
+.btn-outline:hover {
+  border-color: var(--bg-dark-forest);
+  background-color: var(--bg-dark-forest);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  background-color: var(--bg-sage-soft);
+  color: var(--bg-dark-forest);
+}
+
+.btn-ghost:hover {
+  background-color: #d4e4d8;
+  transform: translateY(-2px);
+}
+
+.btn-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.btn:hover .btn-icon {
+  transform: translate(2px, -2px);
+}
+
+/* 3. Section Headers */
+.section-header {
+  max-width: 680px;
+  margin-inline: auto;
+  text-align: center;
+  margin-bottom: clamp(2.75rem, 5vw, 4rem);
+}
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-green);
+  background-color: var(--bg-sage-soft);
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 1rem;
+}
+
+.section-dark .section-eyebrow {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #a5d6a7;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3.6vw, 2.85rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.9rem;
+}
+
+.section-subtitle {
+  font-size: clamp(0.98rem, 1.3vw, 1.1rem);
+  color: var(--text-secondary);
+}
+
+.section-dark .section-subtitle {
+  color: var(--text-on-dark-muted);
+}
+

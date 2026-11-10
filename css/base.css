@@ -1,0 +1,194 @@
+/* ==========================================================================
+   BASE.CSS — Design Tokens, Reset, Typography, & Global Utilities
+   ========================================================================== */
+
+:root {
+  /* Color Palette — Botanical Premium Hair Care */
+  --bg-cream: #f6f5ef;
+  --bg-cream-alt: #eeece2;
+  --bg-surface: #ffffff;
+  --bg-dark-forest: #0d2117;
+  --bg-deep-green: #142e20;
+  --bg-sage-soft: #e6efe8;
+
+  --text-primary: #111c15;
+  --text-secondary: #3f5246;
+  --text-muted: #66786c;
+  --text-on-dark: #f5f7f5;
+  --text-on-dark-muted: #b7c9bd;
+
+  --accent-green: #2e7d32;
+  --accent-green-light: #4caf50;
+  --accent-sage: #5c8d6a;
+  --accent-gold: #c58b2b;
+  --accent-amber: #b45309;
+
+  /* Active Hero Theme (Diperbarui secara dinamis saat switch produk) */
+  --active-accent: #2e7d32;
+  --active-accent-soft: rgba(46, 125, 50, 0.14);
+  --active-glow: rgba(76, 175, 80, 0.26);
+
+  /* Borders & Shadows */
+  --border-subtle: rgba(20, 46, 32, 0.1);
+  --border-strong: rgba(20, 46, 32, 0.18);
+  --border-on-dark: rgba(255, 255, 255, 0.12);
+
+  --shadow-sm: 0 4px 14px rgba(13, 33, 23, 0.05);
+  --shadow-md: 0 14px 34px rgba(13, 33, 23, 0.08);
+  --shadow-lg: 0 24px 56px rgba(13, 33, 23, 0.12);
+  --shadow-badge: 0 12px 30px rgba(13, 33, 23, 0.11);
+
+  /* Typography (Maksimal 2 Font Family sesuai PRD) */
+  --font-display: 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing & Layout */
+  --container-max: 1240px;
+  --container-pad: clamp(1.25rem, 4vw, 2.75rem);
+  --section-py: clamp(4.5rem, 8vw, 7.25rem);
+  --header-height: 78px;
+
+  /* Radius & Transitions */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 9999px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-base: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: var(--header-height);
+  overflow-x: hidden;
+}
+
+/* Lenis Recommended Styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-cream);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* Accessibility — Keyboard Focus Ring & Screen Reader Only */
+:focus-visible {
+  outline: 2.5px solid var(--accent-green);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 1rem;
+  z-index: 9999;
+  background: var(--bg-dark-forest);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Layout Containers */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+.section {
+  padding-block: var(--section-py);
+  position: relative;
+}
+
+.section-alt {
+  background-color: var(--bg-cream-alt);
+}
+
+.section-dark {
+  background-color: var(--bg-dark-forest);
+  color: var(--text-on-dark);
+}
+

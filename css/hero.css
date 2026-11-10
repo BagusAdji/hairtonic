@@ -1,0 +1,640 @@
+/* ==========================================================================
+   HERO.CSS — 3D Product Showcase, Floating Badges, Indicators, & Marquee
+   ========================================================================== */
+
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  padding-top: calc(var(--header-height) + 1.25rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      var(--active-glow, rgba(76, 175, 80, 0.24)) 0%,
+      rgba(246, 245, 239, 0) 58%
+    ),
+    linear-gradient(180deg, #f8f7f2 0%, #f1efe6 100%);
+  transition: background 0.6s ease;
+}
+
+/* Decorative Subtle Studio Grid Ring */
+.hero-backdrop-rings {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(680px, 88vw);
+  height: min(680px, 88vw);
+  border-radius: 50%;
+  border: 1px solid rgba(20, 46, 32, 0.06);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-backdrop-rings::before {
+  content: '';
+  position: absolute;
+  inset: 14%;
+  border-radius: 50%;
+  border: 1px dashed rgba(20, 46, 32, 0.07);
+}
+
+.hero-container {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: 1rem 2.25rem;
+}
+
+/* Top Status Bar: NOW SHOWING */
+.hero-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 0.75rem;
+}
+
+.now-showing-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--bg-dark-forest);
+  color: #ffffff;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.38rem 0.88rem;
+  border-radius: var(--radius-pill);
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #69f0ae;
+  box-shadow: 0 0 0 4px rgba(105, 240, 174, 0.25);
+  animation: statusPulse 2s infinite;
+}
+
+@keyframes statusPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 0.75;
+  }
+}
+
+.hero-meta-divider {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.hero-product-code {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--active-accent, var(--accent-green));
+  background-color: var(--active-accent-soft, rgba(46, 125, 50, 0.12));
+  padding: 0.34rem 0.75rem;
+  border-radius: var(--radius-pill);
+  transition: color 0.35s ease, background-color 0.35s ease;
+}
+
+.hero-positioning-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* Main Showcase Grid: Left Info / Center 3D Bottle + Floating Badges / Right Info */
+.hero-showcase-grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(300px, 420px) 1fr;
+  align-items: center;
+  gap: clamp(1.5rem, 3.2vw, 3.5rem);
+  margin-block: 0.25rem 1.25rem;
+}
+
+/* Left Column: Product Name & Description */
+.hero-info-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 0.85rem;
+}
+
+.hero-product-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 4.2vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+}
+
+.hero-product-subtitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--active-accent, var(--accent-green));
+  transition: color 0.35s ease;
+}
+
+.hero-product-description {
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 42ch;
+}
+
+/* Center Stage: 3D Bottle Viewport & Floating Badges */
+.hero-center-showcase {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-stage {
+  position: relative;
+  width: 100%;
+  height: clamp(350px, 46vh, 470px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.hero-canvas:active {
+  cursor: grabbing;
+}
+
+/* Clean Loading State on Canvas */
+.hero-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: radial-gradient(
+    circle,
+    rgba(246, 245, 239, 0.85) 0%,
+    rgba(246, 245, 239, 0) 70%
+  );
+  z-index: 4;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.hero-loading.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loading-spinner {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 3px solid rgba(46, 125, 50, 0.18);
+  border-top-color: var(--active-accent, var(--accent-green));
+  animation: heroSpin 0.85s linear infinite;
+}
+
+.loading-text {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+@keyframes heroSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fallback Poster Container (Tampil hanya bila WebGL/GLB gagal) */
+.hero-fallback {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 3;
+}
+
+.hero-fallback.is-active {
+  display: flex;
+}
+
+.hero-fallback-img {
+  max-height: 340px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 32px rgba(13, 33, 23, 0.18));
+}
+
+.hero-fallback-caption {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.85);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+}
+
+/* Floating Information Badges / Capsules (Left & Right) */
+.hero-floating-badges-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.hero-floating-badge {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: var(--shadow-badge);
+  padding: 0.58rem 0.95rem;
+  border-radius: var(--radius-pill);
+  pointer-events: auto;
+  white-space: nowrap;
+}
+
+.hero-floating-badge--left {
+  top: 20%;
+  left: -15%;
+}
+
+.hero-floating-badge--right {
+  bottom: 28%;
+  right: -18%;
+}
+
+.badge-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--active-accent-soft, rgba(46, 125, 50, 0.14));
+  color: var(--active-accent, var(--accent-green));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+.badge-icon-box svg {
+  width: 18px;
+  height: 18px;
+}
+
+.badge-text-group {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.badge-title {
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.badge-detail {
+  font-size: 0.73rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Right Column: Price Card & CTA */
+.hero-purchase-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  gap: 1.15rem;
+  padding-left: 0.75rem;
+}
+
+.hero-price-card {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  min-width: 240px;
+}
+
+.hero-price-eyebrow {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.hero-price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.hero-price-value {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 2.8vw, 2.35rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.hero-volume-pill {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--active-accent, var(--accent-green));
+  background: var(--active-accent-soft, rgba(46, 125, 50, 0.12));
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Hero Size Selector Pills */
+.hero-size-selector {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.45rem;
+  margin-top: 0.65rem;
+  padding-top: 0.65rem;
+  border-top: 1px dashed var(--border-subtle);
+}
+
+.hero-size-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.32rem 0.65rem;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--border-subtle);
+  background-color: var(--bg-cream);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.hero-size-pill:hover {
+  border-color: var(--active-accent, var(--accent-green));
+}
+
+.hero-size-pill.is-active {
+  background-color: var(--active-accent, var(--accent-green));
+  border-color: var(--active-accent, var(--accent-green));
+  color: #ffffff;
+  box-shadow: 0 4px 12px var(--active-glow, rgba(46, 125, 50, 0.28));
+}
+
+.hero-size-pill .size-pr {
+  font-weight: 800;
+}
+
+/* Shopee Icon & Shopee Button Branding */
+.shopee-icon {
+  width: 19px;
+  height: 19px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.btn-shopee {
+  background-color: #ee4d2d !important;
+  color: #ffffff !important;
+  border-color: #ee4d2d !important;
+  box-shadow: 0 10px 24px rgba(238, 77, 45, 0.28) !important;
+}
+
+.btn-shopee:hover {
+  background-color: #d73211 !important;
+  border-color: #d73211 !important;
+  box-shadow: 0 14px 30px rgba(238, 77, 45, 0.38) !important;
+  transform: translateY(-2px);
+}
+
+.hero-cta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.65rem;
+  width: 100%;
+  max-width: 270px;
+}
+
+.hero-cta-group .btn {
+  width: 100%;
+}
+
+.hero-cta-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Bottom Bar: Two Product Indicators with Auto-Switch Progress Bar */
+.hero-bottom-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0.25rem;
+}
+
+.hero-indicators {
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(210px, 260px));
+  gap: 0.85rem;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(10px);
+  padding: 0.45rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+}
+
+.indicator-btn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.45rem;
+  padding: 0.75rem 1rem;
+  border-radius: calc(var(--radius-lg) - 5px);
+  text-align: left;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+  overflow: hidden;
+  min-height: 58px;
+}
+
+.indicator-btn:hover {
+  background-color: rgba(20, 46, 32, 0.04);
+}
+
+.indicator-btn.is-active {
+  background-color: #ffffff;
+  box-shadow: 0 4px 14px rgba(13, 33, 23, 0.07);
+}
+
+.indicator-top-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.indicator-code {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.indicator-btn.is-active .indicator-code {
+  color: var(--active-accent, var(--accent-green));
+}
+
+.indicator-price {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.indicator-name {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.indicator-progress-track {
+  width: 100%;
+  height: 3px;
+  background-color: rgba(20, 46, 32, 0.1);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-top: 0.15rem;
+}
+
+.indicator-progress-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--active-accent, var(--accent-green));
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.hero-switch-hint {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+/* Horizontal Marquee Below Hero */
+.hero-marquee {
+  position: relative;
+  z-index: 2;
+  background-color: var(--bg-dark-forest);
+  color: var(--text-on-dark);
+  padding-block: 0.95rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  user-select: none;
+}
+
+.marquee-viewport {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  width: max-content;
+  animation: marqueeScroll 45s linear infinite;
+}
+
+.hero-marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #e4ede7;
+}
+
+.marquee-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #69f0ae;
+}
+
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
